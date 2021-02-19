@@ -7,6 +7,8 @@ $("button").click(function(){
   let userChosenColour = this.id;
   userClickedPattern.push(userChosenColour);
   console.log(userClickedPattern);
+  let audio = new Audio("sounds/" + userChosenColour + ".mp3");
+  audio.play();
 });
 
 function nextSequence() {
