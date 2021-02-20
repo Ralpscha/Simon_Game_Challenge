@@ -1,10 +1,10 @@
-let buttonColours = ["red", "blue", "green", "yellow"];
-let randomChosenColour = "";
-let gamePattern = [];
-let userClickedPattern = [];
-let started = false;
-let level = 0;
 
+  let buttonColours = ["red", "blue", "green", "yellow"];
+  let randomChosenColour = "";
+  let gamePattern = [];
+  let userClickedPattern = [];
+  let started = false;
+  let level = 0;
 
 $(document).keypress(function (){
   if (!started) {
@@ -36,8 +36,6 @@ function nextSequence() {
   let randomNumber = Math.floor(Math.random() * 4);
   console.log(randomNumber);
   randomChosenColour = buttonColours[randomNumber];
-
-
   $("#"+randomChosenColour).fadeOut(500).fadeIn(100);
   playSound(randomChosenColour);
   gamePattern.push(randomChosenColour);
@@ -53,7 +51,7 @@ function animatePress(currentColour) {
   $("#" + currentColour).addClass("pressed");
   setTimeout(function(){
     $("#" + currentColour).removeClass("pressed")
-  },150);
+  },100);
 }
 
 function checkAnswer(currentLevel) {
@@ -68,8 +66,17 @@ function checkAnswer(currentLevel) {
     }
   } else {
     console.log("wrong");
+    playSound("wrong");
+    gameOver();
   }
+}
 
+function gameOver(){
+  $("body").addClass("game-over");
+  setTimeout(function () {
+    $("body").removeClass("game-over", 200);
+  })
+  $("h1").text("Game over, Press Any Key to Restart");
 }
 
 
