@@ -13,7 +13,6 @@ $(document).keypress(function (){
     nextSequence();
     started = true;
   }
-
 })
 
 
@@ -61,23 +60,36 @@ function checkAnswer(currentLevel) {
   if(gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
     console.log("success");
     if(userClickedPattern.length === gamePattern.length) {
-      setTimeout(nextSequence, 2000);
+      setTimeout(nextSequence, 1000);
 
     }
   } else {
     console.log("wrong");
     playSound("wrong");
-    gameOver();
+    $("body").addClass("game-over");
+    $("#level-title").text("Game over, Press Any Key to Restart");
+    setTimeout(function (){
+      $("body").removeClass("game-over");
+    }, 200);
+
+    startOver();
+
   }
 }
 
 function gameOver(){
   $("body").addClass("game-over");
   setTimeout(function () {
-    $("body").removeClass("game-over", 200);
+    $("body").removeClass("game-over", 300);
   })
   $("h1").text("Game over, Press Any Key to Restart");
+  $(document).keypress(startOver);
 }
 
+function startOver(){
+  level = 0;
+  gamePattern = [];
+  started = false;
 
+}
 
